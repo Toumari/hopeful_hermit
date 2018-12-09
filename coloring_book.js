@@ -14,7 +14,7 @@ function add_coloring_book_events() {
 		event.preventDefault();
 		// Get the current element and color and save it in undo_element and undo_to_color variables
 		undo_element = this;
-		undo_to_color = $(this).attr("fill");
+		undo_to_color = $(this).attr("style");
 		// Toggle the "Undo" button to make sure it says "Undo" (it might say "Redo")
 		$('#undo_redo').attr("value", "Undo");
 		// Set the fill of clicked portion of drawing to the color chosen in palette below
@@ -44,9 +44,9 @@ function add_coloring_book_events() {
 
 	$('#undo_redo').bind("click", function (event) {
 		// First, save the existing color of the element we're going to undo
-		existing_color = $(undo_element).attr("fill");
+		existing_color = $(undo_element).attr("style");
 		// Now revert the color back to the undo_to_color
-		$(undo_element).attr("fill", undo_to_color);
+		$(undo_element).attr("style", undo_to_color);
 		// Finally, make existing_color the new undo_to_color, to support "Redo" functionality
 		undo_to_color = existing_color;
 		// If the button is named "Undo", rename it "Redo" and vice versa
