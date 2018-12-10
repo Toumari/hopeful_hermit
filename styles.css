@@ -14,11 +14,16 @@ html, body {
   
   #picture {
     /* ensure 1:1 aspect ratio, tweak 50 to make SVG larger */
-    width: 60vmin;
-    height: 60vmin;  
+    width: auto ;
+    height: auto ;  
     /* set some maximum size (width and height need to match
      * aspect ratio, 1:1 in this case */
-    max-width: 700px;
+     max-width: 100% ;
     max-height: 700px;
-    margin-left: 260px;
+  }
+
+  img {
+    width: auto ;
+    max-width: 100% ;
+    height: auto ;
   }
