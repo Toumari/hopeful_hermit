@@ -23,10 +23,7 @@ html, body {
     padding-bottom: auto;
   }
 
- #canvas {
-     overflow: scroll;
- }
-
+  
 #menu {
   width: 100%;
     position: fixed;
@@ -36,5 +33,11 @@ html, body {
     left: 0;
     background: #FFF;
     border-top: solid 1px #999;
+}
+
+@media only screen and (max-width: 720px) {
+    #menu {
+        position: absolute;
+    }
 }
 
