@@ -5,7 +5,7 @@
 
 <head>
     <title>Coloring Book</title>
-    <script src="js/jquery-1.6.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/jquery.panzoom.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -989,21 +989,35 @@
         </object>
         </div>
         <script>
-             
-        (function() {
-            var $section = $('section').first();
-          var $panzoom = $section.find('.panzoom').panzoom();
-          $panzoom.parent().on('mousewheel.focal', function( e ) {
-            e.preventDefault();
-            var delta = e.delta || e.originalEvent.wheelDelta;
-            var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-            $panzoom.panzoom('zoom', zoomOut, {
-              increment: 0.1,
-              animate: false,
-              focal: e
-            });
-          });
-        })();
+        var $section = $('section').first();
+        var pageContainer = $section.find('.panzoom').panzoom();
+        pageContainer.panzoom({
+            increment: 0.2,
+            duration: 500,
+            disablePan: false,
+            minScale: 0.3,
+            maxScale: 3,
+            contain: 'invert',
+            $zoomIn: $("#btnZoomIn"),
+            $zoomOut: $("#btnZoomOut"),
+            onEnd: onPanZoomEnd
+        });
+        var onPanZoomEnd = function () {
+            alert("dads");
+        };
+
+        pageContainer.on("panzoomchange", function () {
+          $("#result").append("<br/>zoom changed");
+        });
+        pageContainer.on("panzoomstart", function () {
+
+        });
+        pageContainer.on("panzoomend", function (e, panzoom) {
+  $("#result").append("<br/>zoom end");
+        });
+        pageContainer.on("panzoompan", function (e, panzoom, x, y) {
+
+        });
       
         </script>
     </section>
