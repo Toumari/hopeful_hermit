@@ -11,7 +11,6 @@ function add_coloring_book_events() {
 	// Oddly, the selector $('path.colorable') does not work in iBooks reader, although it does in Mobile Safari
 	$('path[class="colorable"]').bind("click", function (event) {
 		// Suppress default; helpful on touchscreen devices
-		event.preventDefault();
 		// Get the current element and color and save it in undo_element and undo_to_color variables
 		undo_element = this;
 		undo_to_color = $(this).attr("style");
