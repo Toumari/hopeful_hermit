@@ -28,8 +28,8 @@ html, body {
   width: 100%;
     position: fixed;
     z-index: 1;
-    bottom: 20px;
-    height: 250px;
+    bottom: 0px;
+    height: 300px;
     left: 0;
     background: #FFF;
     border-top: solid 1px #999;
