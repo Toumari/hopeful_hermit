@@ -1003,18 +1003,19 @@
             onEnd: onPanZoomEnd
         });
         var onPanZoomEnd = function () {
-            alert("dads");
+            
         };
 
         pageContainer.on("panzoomchange", function () {
-          $("#result").append("<br/>zoom changed");
+
         });
         pageContainer.on("panzoomstart", function () {
 
         });
         pageContainer.on("panzoomend", function (e, panzoom) {
-  $("#result").append("<br/>zoom end");
+  
         });
+
         pageContainer.on("panzoompan", function (e, panzoom, x, y) {
 
         });
