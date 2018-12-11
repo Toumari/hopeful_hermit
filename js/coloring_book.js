@@ -9,7 +9,7 @@ function eventWindowLoaded() {
 function add_coloring_book_events() {
 	// Add click events for colorable portions of drawing
 	// Oddly, the selector $('path.colorable') does not work in iBooks reader, although it does in Mobile Safari
-	$('path[class="colorable"]').on("click touchstart", function (event) {
+	$('path[class="colorable"]').bind("click touchstart", function (event) {
 		// Suppress default; helpful on touchscreen devices
 		event.preventDefault();
 		// Get the current element and color and save it in undo_element and undo_to_color variables
@@ -24,7 +24,7 @@ function add_coloring_book_events() {
 	});
 
 	// Add click events for color palette
-	$('.color_choice').on("click touchstart", function (event) {
+	$('.color_choice').bind("click touchstart", function (event) {
 		// Get button id, which is the color name 
 		color_chosen = $(this).attr("id");
 		// Set color_chosen text to the name of color clicked
@@ -32,7 +32,7 @@ function add_coloring_book_events() {
 	});
 
 	// Add click events for reset button, which reverts the fill of the entire drawing to white
-	$('#reset_image').on("click touchstart", function (event) {
+	$('#reset_image').bind("click touchstart", function (event) {
 		// Get all the colorable elements and set fill back to white
 		$('path[class="colorable"]').attr("fill", "white");
 		// Resetting the drawing clears all undo information
@@ -41,7 +41,7 @@ function add_coloring_book_events() {
 		undo_to_color = "white";
 	});
 
-	$('#undo_redo').on("click touchstart", function (event) {
+	$('#undo_redo').bind("click touchstart", function (event) {
 		// First, save the existing color of the element we're going to undo
 		existing_color = $(undo_element).attr("style");
 		// Now revert the color back to the undo_to_color
