@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="js/svg-pan-zoom.js"></script>
+     <script src="js/saveSvgAsPng.js"></script>
     <script src="js/hammer.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -1008,11 +1009,21 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
-                    <p><input type="button" id="undo_redo" value="Undo" /></p>
+                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="save_svg" onclick="javascript:sayHello();" value="Save" /></p>
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+
+    function sayHello() {
+        saveSvgAsPng(document.getElementById("mobile-svg"), "diagram.png");
+    }
+
+    </script>
 
     <script>
         // Don't use window.onLoad like this in production, because it can only listen to one function.
@@ -1074,7 +1085,6 @@
             });
         };
     </script>
-
 </body>
 
 </html>
