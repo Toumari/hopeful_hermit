@@ -1020,7 +1020,8 @@
     <script>
 
     function sayHello() {
-        saveSvgAsPng(document.getElementById("mobile-svg"), "diagram.png", {scale: 0.5});
+        svgAsPngUri(document.getElementById("mobile-svg"), {}, function(uri) {
+            });
     }
 
     </script>
