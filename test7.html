@@ -14,12 +14,17 @@
     <script src="js/hammer.js"></script>
     <script src="js/html2canvas.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- Required to convert named colors to RGB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"></script>
+    <!-- Optional if you want blur -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/1.4.1/stackblur.min.js"></script>
+    <!-- Main canvg code -->
+    <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script> 
 </head>
 
 <body>
-    <div id="wrapper">
     <div id="mobile-div" class="visualization" style="width: 100vw; height: 100vh; border:1px solid black; ">
-        <svg id="mobile-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 1700" version="1.1"
+        <svg id="canvas" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 1700" version="1.1"
             style=" display: inline; width:inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit; stroke: #151515; stroke-opacity: 1.0; background-color:#F8F9F7;">
             <title>breathe</title>
             <g id="scene">
@@ -982,7 +987,6 @@
                     transform="translate(151 293)" />
             </g>
         </svg>
-    </div>
         <div class="row">
             <div id="menu" class="menu_visible">
                 <div class="col-md-12 text-center">
@@ -1012,7 +1016,8 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
-                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="test" onclick="javascript:canvasAgain()" value="Test" /></p>
+                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="test" onclick="javascript:canvasIt()" value="Test" /></p>
+                    <canvas id="canvaser" width="1000px" height="600px" ></canvas>
                     
 
                     
@@ -1023,10 +1028,10 @@
     <script>
 
     function canvasAgain() { 
-    html2canvas(document.getElementById("wrapper"), { letterRendering: 1, allowTaint : true}).then(function(canvas) {
+    html2canvas(document.getElementById("canvas")).then(function(canvas) {
             var link = document.createElement("a");
             document.body.appendChild(link);
-            link.download = "test.jpg";
+            link.download = "manpower_efficiency.jpg";
             link.href = canvas.toDataURL();
             link.target = '_blank';
             link.click();
@@ -1086,7 +1091,7 @@
                 }
             }
             // Expose to window namespace for testing purposes
-            window.panZoom = svgPanZoom('#mobile-svg', {
+            window.panZoom = svgPanZoom('#canvas', {
                 zoomEnabled: true
                 , controlIconsEnabled: true
                 , fit: 1
@@ -1095,7 +1100,6 @@
             });
         };
     </script>
-    </div>
 </body>
 
 </html>
