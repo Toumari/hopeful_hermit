@@ -12,11 +12,12 @@
     <script src="js/svg-pan-zoom.js"></script>
      <script src="js/saveSvgAsPng.js"></script>
     <script src="js/hammer.js"></script>
+    <script src="js/html2canvas.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div id="mobile-div" style="width: 100vw; height: 100vh; border:1px solid black; ">
+    <div id="mobile-div" class="visualization" style="width: 100vw; height: 100vh; border:1px solid black; ">
         <svg id="mobile-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 1700" version="1.1"
             style=" display: inline; width:inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit; stroke: #151515; stroke-opacity: 1.0; background-color:#F8F9F7;">
             <title>breathe</title>
@@ -1009,21 +1010,27 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
-                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="save_svg" onclick="javascript:sayHello();" value="Save" /></p>
+                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="test" onclick="javascript:canvasAgain()" value="Test" /></p>
                     
+
                     
                 </div>
             </div>
         </div>
     </div>
-
     <script>
 
-    function sayHello() {
-        svgAsPngUri(document.getElementById("mobile-svg"), {}, function(uri) {
-            });
+    function canvasAgain() { 
+    html2canvas(document.getElementById("menu")).then(function(canvas) {
+            var link = document.createElement("a");
+            document.body.appendChild(link);
+            link.download = "manpower_efficiency.jpg";
+            link.href = canvas.toDataURL();
+            link.target = '_blank';
+            link.click();
+        });
     }
-
+    
     </script>
 
     <script>
