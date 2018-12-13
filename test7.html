@@ -987,8 +987,6 @@
                     transform="translate(151 293)" />
             </g>
         </svg>
-        <canvas id="canvas" width="2000" height="2000"></canvas>
-        <div id="png-container"></div>
         <div class="row">
             <div id="menu" class="menu_visible">
                 <div class="col-md-12 text-center">
@@ -1022,28 +1020,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-
-        function create() {
-            var svgString = new XMLSerializer().serializeToString(document.getElementById('svg-test'));
-            
-            var canvas = document.getElementById('canvas');
-            var ctx = canvas.getContext("2d");
-            var DOMURL = self.URL || self.webkitURL || self;
-            var img = new Image();
-            var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
-            var url = DOMURL.createObjectURL(svg);
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0);
-                var png = canvas.toDataURL("image/png");
-                document.querySelector('#png-container').innerHTML = '<img src="'+png+'"/>';
-                DOMURL.revokeObjectURL(png);
-            };
-            img.src = url;
-        }
-            
-            </script>
 
     <script>
         // Don't use window.onLoad like this in production, because it can only listen to one function.
