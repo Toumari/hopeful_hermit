@@ -1018,29 +1018,33 @@
 
                     <hr>
                     <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="save" value="save" onclick="javascript:save()" /></p>
-                    <a download="image.png" id="laimag" href=""><div class="quotebtn cancelar" onclick="">download</div></a>
+                    <a download="image.png" onclick="javascript:save();" id="laimag" href="">Download</a>
             </div>
         </div>
     </div>
 
     <script>
 
+        var savedImage = '';
+        
         var svg = document.querySelector( "svg" );
         var svgData = new XMLSerializer().serializeToString( svg );
 
         var canvas = document.createElement( "canvas" );
         var ctx = canvas.getContext( "2d" );
-
+        
         var img = document.createElement( "img" );
         img.setAttribute( "src", "data:image/svg+xml;base64," + btoa( svgData ) );
 
         img.onload = function() {
             ctx.drawImage( img, 0, 0 );
-            
             // Now is done
             console.log( canvas.toDataURL( "image/png" ) );
-            document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png" ))
-        };
+            savedImage = canvas.toDataURL("image/png");
+
+                document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png" ))
+        }
+
 
     </script>
 
