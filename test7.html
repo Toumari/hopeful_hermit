@@ -987,6 +987,7 @@
                     transform="translate(151 293)" />
             </g>
         </svg>
+        <canvas id="canvas" href=""></canvas>
         <div class="row">
             <div id="menu" class="menu_visible">
                 <div class="col-md-12 text-center">
@@ -1024,36 +1025,22 @@
 
     <script>
 
-    function save() {
-        var mySVG    = document.getElementById("svg-test"),
-        can      = document.createElement('canvas'), // Not shown on page
-        ctx      = can.getContext('2d'),
-        loader   = new Image;   
-                            // Not shown on page
-                            
-                            console.log(mySVG);
-                            console.log(loader);
-    var DOMURL = window.URL || window.webkitURL || window;
-    loader.width  = can.width  = 2200;
-    loader.height = can.height = 2200;
-    var url = "";
-    loader.onload = function(){
-        mylog("done");
-    ctx.drawImage( loader, 0, 0, loader.width, loader.height );
-    setTimeout(function(){
-    mylog("done2");
+        var svg = document.querySelector( "svg" );
+        var svgData = new XMLSerializer().serializeToString( svg );
 
-    savedImage = can.toDataURL("image/png");
-    var svgAsXML = (new XMLSerializer).serializeToString( mySVG );
-    url = 'data:image/svg+xml,' + encodeURIComponent( svgAsXML );
-    setTimeout(function(){
-    loader.src = url;
+        var canvas = document.createElement( "canvas" );
+        var ctx = canvas.getContext( "2d" );
 
-    d("laimag").setAttribute("href",savedImage);
+        var img = document.createElement( "img" );
+        img.setAttribute( "src", "data:image/svg+xml;base64," + btoa( svgData ) );
 
-    },100);
-    })}}
-
+        img.onload = function() {
+            ctx.drawImage( img, 0, 0 );
+            
+            // Now is done
+            console.log( canvas.toDataURL( "image/png" ) );
+            document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png" ))
+        };
 
     </script>
 
