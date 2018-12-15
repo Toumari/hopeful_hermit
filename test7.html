@@ -1018,10 +1018,8 @@
 
                     <hr>
                     <p><input type="button" id="undo_redo" value="Undo" />
-                        <a id="laimag" onclick="javascript:convert()">
-                            Save
-                        </a>
-                        <a download="image.png" id="finished" href="">Download</a>
+                        <a download="image.png" id="laimag" onclick="javascript:convert().preventDefault()">Save</a>
+                        <a download="" onclick="javascript:convert().preventDefault()" id="finished" href="">Download</a>
                 </div>
             </div>
         </div>
@@ -1067,7 +1065,7 @@
 
             function convert() {
                 var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
-                document.getElementById('finished').setAttribute('href', img)
+                document.getElementById('finished').setAttribute('download', img)
             }
 
 
