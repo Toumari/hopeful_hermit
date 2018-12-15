@@ -1019,55 +1019,17 @@
                     <hr>
                     <p><input type="button" id="undo_redo" value="Undo" />
                         <a download="image.png" id="laimag" onclick="javascript:convert().preventDefault()">Save</a>
-                        <a download="" onclick="javascript:convert().preventDefault()" id="finished" href="">Download</a>
+                        <button onclick="javascript:convert()">Button</button>
                 </div>
             </div>
         </div>
 
         <script>
 
-            function save() {
-                var mySVG = document.getElementById("svg-test"),
-                    can = document.createElement('canvas'), // Not shown on page
-                    ctx = can.getContext('2d'),
-                    loader = new Image;
-                // Not shown on page
-
-                console.log(mySVG);
-                console.log(loader);
-                var DOMURL = window.URL || window.webkitURL || window;
-                loader.width = can.width = 2200;
-                loader.height = can.height = 2200;
-                var url = "";
-                loader.onload = function () {
-                    mylog("done");
-                    ctx.drawImage(loader, 0, 0, loader.width, loader.height);
-                    setTimeout(function () {
-                        mylog("done2");
-
-                        savedImage = can.toDataURL("image/png");
-                        var svgAsXML = (new XMLSerializer).serializeToString(mySVG);
-                        url = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
-                        setTimeout(function () {
-                            loader.src = url;
-
-                            d("laimag").setAttribute("href", savedImage);
-
-                        }, 100);
-                    })
-                }
-            }
-
-
-        </script>
-
-        <script>
-
             function convert() {
                 var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
-                document.getElementById('finished').setAttribute('download', img)
+                document.getElementById('finished').setAttribute('href', img)
             }
-
 
         </script>
 
