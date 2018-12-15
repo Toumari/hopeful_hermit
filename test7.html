@@ -1017,35 +1017,74 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
+<<<<<<< HEAD
                     <p><input type="button" id="undo_redo" value="Undo" />
                         <a id="laimag" onclick="javascript:convert()">
                             Save
                         </a>
                         <a download="image.png" id="finished" href="">Download</a>
                 </div>
+=======
+                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="save" value="save" onclick="javascript:save()" /></p>
+                    <a download="image.png" onclick="javascript:save();" id="laimag" href="">Download</a>
+>>>>>>> 60cfc8faf43bc3bad8d3900d719397f76aed16ae
             </div>
         </div>
 
         <script>
 
-            var savedImage = '';
+<<<<<<< HEAD
+            function save() {
+                var mySVG = document.getElementById("svg-test"),
+                    can = document.createElement('canvas'), // Not shown on page
+                    ctx = can.getContext('2d'),
+                    loader = new Image;
+                // Not shown on page
 
-            var svg = document.querySelector("svg");
-            var svgData = new XMLSerializer().serializeToString(svg);
+                console.log(mySVG);
+                console.log(loader);
+                var DOMURL = window.URL || window.webkitURL || window;
+                loader.width = can.width = 2200;
+                loader.height = can.height = 2200;
+                var url = "";
+                loader.onload = function () {
+                    mylog("done");
+                    ctx.drawImage(loader, 0, 0, loader.width, loader.height);
+                    setTimeout(function () {
+                        mylog("done2");
 
-            var canvas = document.createElement("canvas");
-            var ctx = canvas.getContext("2d");
+                        savedImage = can.toDataURL("image/png");
+                        var svgAsXML = (new XMLSerializer).serializeToString(mySVG);
+                        url = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
+                        setTimeout(function () {
+                            loader.src = url;
 
-            var img = document.createElement("img");
-            img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
+                            d("laimag").setAttribute("href", savedImage);
+=======
+        var savedImage = '';
+        
+        var svg = document.querySelector( "svg" );
+        var svgData = new XMLSerializer().serializeToString( svg );
 
-            img.onload = function () {
-                ctx.drawImage(img, 0, 0);
-                // Now is done
-                console.log(canvas.toDataURL("image/png"));
-                savedImage = canvas.toDataURL("image/png");
+        var canvas = document.createElement( "canvas" );
+        var ctx = canvas.getContext( "2d" );
+        
+        var img = document.createElement( "img" );
+        img.setAttribute( "src", "data:image/svg+xml;base64," + btoa( svgData ) );
 
-                document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png"))
+        img.onload = function() {
+            ctx.drawImage( img, 0, 0 );
+            // Now is done
+            console.log( canvas.toDataURL( "image/png" ) );
+            savedImage = canvas.toDataURL("image/png");
+
+                document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png" ))
+        }
+>>>>>>> 60cfc8faf43bc3bad8d3900d719397f76aed16ae
+
+                        }, 100);
+                    })
+                }
             }
 
 
@@ -1060,6 +1099,7 @@
 
 
         </script>
+
 
 
         <script>
