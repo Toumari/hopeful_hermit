@@ -1017,9 +1017,8 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
-                    <p><input type="button" id="undo_redo" value="Undo" />
-                        <a download="image.png" id="laimag">Save</a>
-                        <button id="buttontopress">Button</button>
+                    <p><input type="button" id="undo_redo" value="Undo" /></p>
+                    <p><input type="button" id="saveaspng" href="" value="Save" /></p>
                 </div>
             </div>
         </div>
@@ -1035,9 +1034,12 @@
 
         <script>
 
-            $('#buttontopress').bind("click touchstart", function (event) {
-                var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
-                document.getElementById('finished').setAttribute('href', img)
+            $('#saveaspng').bind("click touchstart", function (event) {
+                svgAsPngUri(document.getElementById("svg-test"), {}, function (uri) {
+                    console.log(uri)
+                    img = uri
+                    document.getElementById('saveaspng').setAttribute('href', img)
+                });
 
             });
 
