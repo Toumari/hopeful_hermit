@@ -1019,7 +1019,7 @@
                     <hr>
                     <p><input type="button" id="undo_redo" value="Undo" />
                         <a download="image.png" id="laimag">Save</a>
-                        <button onclick="javascript:convert()">Button</button>
+                        <button id="buttontopress">Button</button>
                 </div>
             </div>
         </div>
@@ -1035,7 +1035,7 @@
 
         <script>
 
-            $('#svg-test').bind("click touchstart", function (event) {
+            $('#buttontopress').bind("click touchstart", function (event) {
                 var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
                 document.getElementById('finished').setAttribute('href', img)
 
