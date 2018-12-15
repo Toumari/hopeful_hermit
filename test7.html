@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="js/svg-pan-zoom.js"></script>
-     <script src="js/saveSvgAsPng.js"></script>
+    <script src="js/saveSvgAsPng.js"></script>
     <script src="js/hammer.js"></script>
     <script src="js/html2canvas.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -19,7 +19,7 @@
     <!-- Optional if you want blur -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/1.4.1/stackblur.min.js"></script>
     <!-- Main canvg code -->
-    <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
 </head>
 
 <body>
@@ -1017,97 +1017,111 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
-                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="save" value="save" onclick="javascript:save()" /></p>
-                    <a download="image.png" onclick="javascript:save();" id="laimag" href="">Download</a>
+                    <p><input type="button" id="undo_redo" value="Undo" />
+                        <a id="laimag" onclick="javascript:convert()">
+                            Save
+                        </a>
+                        <a download="image.png" id="finished" href="">Download</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
+        <script>
 
-        var savedImage = '';
-        
-        var svg = document.querySelector( "svg" );
-        var svgData = new XMLSerializer().serializeToString( svg );
+            var savedImage = '';
 
-        var canvas = document.createElement( "canvas" );
-        var ctx = canvas.getContext( "2d" );
-        
-        var img = document.createElement( "img" );
-        img.setAttribute( "src", "data:image/svg+xml;base64," + btoa( svgData ) );
+            var svg = document.querySelector("svg");
+            var svgData = new XMLSerializer().serializeToString(svg);
 
-        img.onload = function() {
-            ctx.drawImage( img, 0, 0 );
-            // Now is done
-            console.log( canvas.toDataURL( "image/png" ) );
-            savedImage = canvas.toDataURL("image/png");
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
 
-                document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png" ))
-        }
+            var img = document.createElement("img");
+            img.setAttribute("src", "data:image/svg+xml;base64," + btoa(svgData));
 
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0);
+                // Now is done
+                console.log(canvas.toDataURL("image/png"));
+                savedImage = canvas.toDataURL("image/png");
 
-    </script>
-
-    <script>
-        // Don't use window.onLoad like this in production, because it can only listen to one function.
-        window.onload = function () {
-            var eventsHandler;
-            eventsHandler = {
-                haltEventListeners: ['touchstart', 'touchend', 'touchmove', 'touchleave', 'touchcancel']
-                , init: function (options) {
-                    var instance = options.instance
-                        , initialScale = 1
-                        , pannedX = 0
-                        , pannedY = 0
-                    // Init Hammer
-                    // Listen only for pointer and touch events
-                    this.hammer = Hammer(options.svgElement, {
-                        inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput
-                    })
-                    // Enable pinch
-                    this.hammer.get('pinch').set({ enable: true })
-                    // Handle double tap
-                    this.hammer.on('doubletap', function (ev) {
-                        instance.zoomIn()
-                    })
-                    // Handle pan
-                    this.hammer.on('panstart panmove', function (ev) {
-                        // On pan start reset panned variables
-                        if (ev.type === 'panstart') {
-                            pannedX = 0
-                            pannedY = 0
-                        }
-                        // Pan only the difference
-                        instance.panBy({ x: ev.deltaX - pannedX, y: ev.deltaY - pannedY })
-                        pannedX = ev.deltaX
-                        pannedY = ev.deltaY
-                    })
-                    // Handle pinch
-                    this.hammer.on('pinchstart pinchmove', function (ev) {
-                        // On pinch start remember initial zoom
-                        if (ev.type === 'pinchstart') {
-                            initialScale = instance.getZoom()
-                            instance.zoomAtPoint(initialScale * ev.scale, { x: ev.center.x, y: ev.center.y })
-                        }
-                        instance.zoomAtPoint(initialScale * ev.scale, { x: ev.center.x, y: ev.center.y })
-                    })
-                    // Prevent moving the page on some devices when panning over SVG
-                    options.svgElement.addEventListener('touchmove', function (e) { e.preventDefault(); });
-                }
-                , destroy: function () {
-                    this.hammer.destroy()
-                }
+                document.getElementById('laimag').setAttribute('href', canvas.toDataURL(" image/png"))
             }
-            // Expose to window namespace for testing purposes
-            window.panZoom = svgPanZoom('#svg-test', {
-                zoomEnabled: true
-                , controlIconsEnabled: true
-                , fit: 1
-                , center: 1
-                , customEventsHandler: eventsHandler
-            });
-        };
-    </script>
+
+
+        </script>
+
+        <script>
+
+            function convert() {
+                var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
+                document.getElementById('finished').setAttribute('href', img)
+            }
+
+
+        </script>
+
+
+        <script>
+            // Don't use window.onLoad like this in production, because it can only listen to one function.
+            window.onload = function () {
+                var eventsHandler;
+                eventsHandler = {
+                    haltEventListeners: ['touchstart', 'touchend', 'touchmove', 'touchleave', 'touchcancel']
+                    , init: function (options) {
+                        var instance = options.instance
+                            , initialScale = 1
+                            , pannedX = 0
+                            , pannedY = 0
+                        // Init Hammer
+                        // Listen only for pointer and touch events
+                        this.hammer = Hammer(options.svgElement, {
+                            inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput
+                        })
+                        // Enable pinch
+                        this.hammer.get('pinch').set({ enable: true })
+                        // Handle double tap
+                        this.hammer.on('doubletap', function (ev) {
+                            instance.zoomIn()
+                        })
+                        // Handle pan
+                        this.hammer.on('panstart panmove', function (ev) {
+                            // On pan start reset panned variables
+                            if (ev.type === 'panstart') {
+                                pannedX = 0
+                                pannedY = 0
+                            }
+                            // Pan only the difference
+                            instance.panBy({ x: ev.deltaX - pannedX, y: ev.deltaY - pannedY })
+                            pannedX = ev.deltaX
+                            pannedY = ev.deltaY
+                        })
+                        // Handle pinch
+                        this.hammer.on('pinchstart pinchmove', function (ev) {
+                            // On pinch start remember initial zoom
+                            if (ev.type === 'pinchstart') {
+                                initialScale = instance.getZoom()
+                                instance.zoomAtPoint(initialScale * ev.scale, { x: ev.center.x, y: ev.center.y })
+                            }
+                            instance.zoomAtPoint(initialScale * ev.scale, { x: ev.center.x, y: ev.center.y })
+                        })
+                        // Prevent moving the page on some devices when panning over SVG
+                        options.svgElement.addEventListener('touchmove', function (e) { e.preventDefault(); });
+                    }
+                    , destroy: function () {
+                        this.hammer.destroy()
+                    }
+                }
+                // Expose to window namespace for testing purposes
+                window.panZoom = svgPanZoom('#svg-test', {
+                    zoomEnabled: true
+                    , controlIconsEnabled: true
+                    , fit: 1
+                    , center: 1
+                    , customEventsHandler: eventsHandler
+                });
+            };
+        </script>
 </body>
 
 </html>
