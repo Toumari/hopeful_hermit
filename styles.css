@@ -71,6 +71,10 @@ html, body {
   transition: all 0.2s;
 }
 
+.actionbuttons {
+  padding-bottom: 10px;
+}
+
 @media only screen and (max-width: 720px) {
     #menu {
         position: absolute;
