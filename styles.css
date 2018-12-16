@@ -21,9 +21,11 @@ html, body {
   
 #menu {
   width: 100vw;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     bottom: 0;
+    left: 0;
+    right: 0;
     height: 350px;
     left: 0;
     background: #FFF;
