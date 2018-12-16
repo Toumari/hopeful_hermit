@@ -37,7 +37,7 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 250px;
+    height: 350px;
     left: 0;
     background: #FFF;
     border-top: solid 1px #999;
@@ -65,14 +65,11 @@ html, body {
   height: 30px;
   margin: 5px;
   display: inline-block;
-}
-
   /* background: #f69; */
   /* margin-bottom: 80%; */
   cursor: pointer;
   box-shadow: 2px 2px 0 1px #ddd;
   transition: all 0.2s;
-
 }
 
 @media only screen and (max-width: 720px) {
