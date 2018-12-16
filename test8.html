@@ -1012,14 +1012,14 @@
             <input type="button" class="colorable color_choice" id="black" style="background-color: black; width: 25px; height: 25px;" />
             <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
             <hr>
+            <a download="image.png" id="laimaga" style="display: none;" href="">Download</a>
             <p>
                 <input type="button" id="undo_redo" value="Undo" />
                 <input type="button" id="saveaspng" href="" value="Save" />
             </p>
-            <a download="image.png" id="laimaga" style="display: none;" href="">Download</a>
         </div>
         </div>
-        
+
         <script>
             function convert() {
                 var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
