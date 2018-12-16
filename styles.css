@@ -12,6 +12,7 @@ html, body {
     justify-content: center;
     overflow: hidden;
     position: relative;
+    -webkit-overflow-scrolling: touch;
   }
 
   #mobile-div {
