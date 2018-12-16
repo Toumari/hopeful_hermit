@@ -988,6 +988,7 @@
             </g>
         </svg>
         <canvas id="canvas" href=""></canvas>
+        <img id="saveim" src="none" alt="">
         <div class="row">
             <div id="menu" class="menu_visible">
                 <div class="col-md-12 text-center">
@@ -1017,8 +1018,8 @@
                     <input type="button" class="colorable color_choice" id="white" style="background-color: white; width: 25px; height: 25px;" />
 
                     <hr>
-                    <p><input type="button" id="undo_redo" value="Undo" /></p>
-                    <p><input type="button" id="saveaspng" href="" value="Save" /></p>
+                    <p><input type="button" id="undo_redo" value="Undo" /><input type="button" id="saveaspng" href="" value="Save" /></p>
+                    <a download="image.png" id="laimaga" href="">Download</a>
                 </div>
             </div>
         </div>
@@ -1028,6 +1029,8 @@
             function convert() {
                 var img = saveSvgAsPng(document.getElementById("svg-test"), "diagram.png");
                 document.getElementById('finished').setAttribute('href', img)
+                var newimg = document.getElementById("saveim")
+                newimg.setAttribute('src', img)
             }
 
         </script>
@@ -1038,14 +1041,16 @@
                 svgAsPngUri(document.getElementById("svg-test"), {}, function (uri) {
                     console.log(uri)
                     img = uri
+                    var newimg = document.getElementById("saveim")
+                    var link = document.getElementById('laimaga')
                     document.getElementById('saveaspng').setAttribute('href', img)
+                    newimg.setAttribute('src', img)
+                    link.setAttribute('href', img)
                 });
 
             });
 
         </script>
-
-
 
         <script>
             // Don't use window.onLoad like this in production, because it can only listen to one function.
